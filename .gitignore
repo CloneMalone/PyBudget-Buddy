@@ -1,2 +1,6 @@
 # Ignore all files in data folder.
 data/
+
+# Ignore all cache
+__pycache__/
+*.pyc
