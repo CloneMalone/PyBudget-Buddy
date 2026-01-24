@@ -1,20 +1,27 @@
+# Import tkinter styling utilities
 import tkinter.ttk as ttk
 
+# Class that defines all global color and styling constants for the application
 class GlobalStyles:
+    # Color scheme - dark background with light text
     background_color = "#2B2B2B"
     text_color = "#F9FAFB"
 
+    # Primary button colors
     button_color = "#7C3AED"
     button_hover = "#6D28D9"
     button_active = "#5B21B6"
 
+    # Danger button colors (for destructive actions)
     danger_button_color = "#DC2626"
     danger_button_hover = "#B91C1C"
     danger_button_active = "#991B1B"
 
+    # Font families and sizes used throughout the app
     display_header_font = ("Century Gothic", 20)
     button_font = ("Century Gothic", 10)
 
+    # TreeView (data table) styling
     treeview_heading_color = "#7C3AED"
     treeview_heading_text_color = "#F9FAFB"
     treeview_heading_hover = "#6D28D9"
@@ -23,10 +30,13 @@ class GlobalStyles:
     treeview_font = ("Century Gothic", 10)
     treeview_heading_relief = "flat"
 
+    # Loading label styling (italic text for emphasis)
     loading_label_font = ("Century Gothic", 12, "italic")
 
+    # Form label styling (bold for emphasis)
     form_label_font = ("Century Gothic", 10, "bold")
 
+    # Entry field (text input) styling
     entry_font = ("Century Gothic", 10)
     entry_background = "#1F1F1F"
     entry_border_color = "#3F3F46"
@@ -34,14 +44,16 @@ class GlobalStyles:
 
 
 
+    # Static method that applies all styles to the entire application
     @staticmethod
     def apply_styles(style: ttk.Style):
+        # Use the "clam" theme as the base theme
         style.theme_use("clam")
 
-        # Main frame
+        # Main app frame styling
         style.configure("App.TFrame", background=GlobalStyles.background_color)
 
-        # Primary button
+        # Primary button styling
         style.configure(
             "Primary.TButton",
             font=GlobalStyles.button_font,
@@ -51,6 +63,7 @@ class GlobalStyles:
             borderwidth=0
         )
 
+        # Primary button hover and active states
         style.map(
             "Primary.TButton",
             background=[
@@ -59,7 +72,7 @@ class GlobalStyles:
             ]
         )
 
-        # Danger button
+        # Danger button styling (for delete/destructive actions)
         style.configure(
             "Danger.TButton",
             font=GlobalStyles.button_font,
@@ -68,6 +81,7 @@ class GlobalStyles:
             foreground="white",
             borderwidth=0
         )
+        # Danger button hover and active states
         style.map(
             "Danger.TButton",
             background=[
@@ -76,7 +90,7 @@ class GlobalStyles:
             ]
         )
 
-        # Header label style
+        # Header label styling (large, bold text)
         style.configure(
             "Header.TLabel",
             background=GlobalStyles.background_color,
@@ -84,7 +98,7 @@ class GlobalStyles:
             font=GlobalStyles.display_header_font
         )
 
-        # Form labels (for Entry fields)
+        # Form labels styling (for input field labels)
         style.configure(
             "Form.TLabel",
             background=GlobalStyles.background_color,
@@ -92,7 +106,7 @@ class GlobalStyles:
             font=GlobalStyles.form_label_font
         )
 
-        # Entry fields
+        # Entry field (text input) styling
         style.configure(
             "Form.TEntry",
             font=GlobalStyles.entry_font,
@@ -106,6 +120,7 @@ class GlobalStyles:
             relief="flat"
         )
 
+        # Entry field focus state styling (purple border when focused)
         style.map(
             "Form.TEntry",
             bordercolor=[("focus", GlobalStyles.entry_focus_border)],
@@ -115,7 +130,7 @@ class GlobalStyles:
 
 
 
-        # TreeView (Data Table)
+        # TreeView (Data Table) styling
         style.configure(
             "Custom.Treeview",
             font=GlobalStyles.treeview_font,
@@ -125,7 +140,7 @@ class GlobalStyles:
             padding=[10, 10, 10, 10]
         )
 
-        # Configure the Treeview heading style
+        # Configure the TreeView column heading styling
         style.configure("Custom.Treeview.Heading",
             background=GlobalStyles.treeview_heading_color,
             foreground="white",
@@ -139,16 +154,18 @@ class GlobalStyles:
             foreground=[('selected', 'white')]
         )
 
+        # TreeView heading hover state (changes color on hover)
         style.map("Custom.Treeview.Heading",
             background=[
                 ('active', GlobalStyles.treeview_heading_hover)
             ]
         )
 
-        # Loading label
+        # Loading label styling (italic text for loading messages)
         style.configure(
             "Loading.TLabel",
             background=GlobalStyles.background_color,
             foreground=GlobalStyles.text_color,
             font=GlobalStyles.loading_label_font
         )
+
