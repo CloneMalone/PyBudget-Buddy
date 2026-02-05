@@ -58,7 +58,7 @@ class AddExpenseView(ttk.Frame):
         ttk.Button(
             button_group,
             text="Home",
-            style="Primary.TButton",
+            style="Secondary.TButton",
             command=lambda: parent.show_frame("dashboard", reason="home") 
         ).pack(side="left", padx=10)
 

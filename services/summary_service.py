@@ -1,21 +1,40 @@
 # Import database connection utilities
 from models.database import get_connection
 
+
 # Service class that handles all summary/dashboard data operations
 class SummaryService:
 
-    # Static method that retrieves all transactions from the database in reverse order
+    # Static method that retrieves all transactions from the database
     @staticmethod
     def get_all_transactions():
+        # Print blank line for console breathing room
+        print("")
+
         conn = get_connection()
         cursor = conn.cursor()
 
-        # Fetch all transactions ordered by date (newest first), then by ID
-        cursor.execute("SELECT * FROM transactions ORDER BY date DESC, id DESC")
-        rows = cursor.fetchall()
-        conn.close()
+        # SQL statement for pulling all transactions (newest first)
+        statement = "SELECT * FROM transactions ORDER BY date DESC, id DESC"
+
+        # Execute the query
+        cursor.execute(statement)
+
+        # Print the statement that just ran
+        # Log what just ran
+        print("🧾 SQL EXECUTED:")
+        print(statement)
         
-        # Convert raw database rows into a list of dictionaries for easier access
+
+        # Grab all rows from the result
+        rows = cursor.fetchall()
+        print("➡️   VALUES:")
+        print(*rows, sep='\n')
+        
+
+        conn.close()
+
+        # Convert raw rows into friendly dictionaries
         transactions = [
             {
                 "id": row[0],
@@ -31,21 +50,31 @@ class SummaryService:
         return transactions
 
 
-    # Static method that calculates total income and total expenses
+    # Static method that calculates total income and expenses
     @staticmethod
     def get_total_income_and_expenses():
+        # Print blank line for console spacing
+        print("")
+
         conn = get_connection()
         cursor = conn.cursor()
 
-        # Fetch all transactions with their amounts and types
-        cursor.execute("SELECT amount, type FROM transactions")
+        # SQL statement for grabbing amounts and types
+        statement = "SELECT amount, type FROM transactions"
+
+        # Execute the query
+        cursor.execute(statement)
+
+        # Print the statement that just ran
+        print(statement)
+
         rows = cursor.fetchall()
 
-        # Initialize counters for income and expenses
+        # Running totals
         total_income = 0
         total_expenses = 0
 
-        # Loop through each transaction and add to appropriate total
+        # Add amounts to the correct bucket
         for amount, txn_type in rows:
             if txn_type.lower() == "income":
                 total_income += amount
@@ -54,9 +83,8 @@ class SummaryService:
 
         conn.close()
 
-        # Return the totals as a dictionary
+        # Return totals in a clean, readable shape
         return {
-            total_income,
-            total_expenses
+            "total_income": total_income,
+            "total_expenses": total_expenses
         }
-

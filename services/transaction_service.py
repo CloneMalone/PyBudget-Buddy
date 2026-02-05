@@ -9,25 +9,34 @@ class TransactionService:
     # Static method that inserts a new transaction into the database
     @staticmethod
     def add(transaction: Transaction):
+        # Print blank line
+        print("")
+
         conn = get_connection()
         cursor = conn.cursor()
 
-        # Insert the transaction's data into the transactions table
-        cursor.execute(
-            """
-            INSERT INTO transactions (name, amount, category, date, type)
-            VALUES (?, ?, ?, ?, ?)
+        # Create statement
+        statement = """
+        INSERT INTO transactions (name, amount, category, date, type)
+        VALUES (?, ?, ?, ?, ?)
+        """
 
-
-""",
-            (
-                transaction.name,
-                transaction.amount,
-                transaction.category,
-                transaction._date,
-                transaction._type,
-            ),
+        # Identify values to be added
+        values = (
+            transaction.name,
+            transaction.amount,
+            transaction.category,
+            transaction._date,
+            transaction._type,
         )
+
+        # Insert the transaction's data into the transactions table
+        cursor.execute(statement, values)
+
+        # Log what just ran
+        print("🧾 SQL EXECUTED:")
+        print(statement.strip())
+        print("➡️ VALUES:", values)
 
         # Save changes to the database and close the connection
         conn.commit()
@@ -36,11 +45,17 @@ class TransactionService:
     # Static method that deletes all transactions from the database
     @staticmethod
     def clear_all():
+        # Print blank line
+        print("")
+
         conn = get_connection()
         cursor = conn.cursor()
 
+        statement = "DELETE FROM transactions"
+        print(statement)
+
         # Delete all rows from the transactions table
-        cursor.execute("DELETE FROM transactions")
+        cursor.execute(statement)
 
         # Save changes and close the connection
         conn.commit()

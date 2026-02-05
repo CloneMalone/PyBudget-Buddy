@@ -12,10 +12,21 @@ class GlobalStyles:
     button_hover = "#6D28D9"
     button_active = "#5B21B6"
 
+    # Info button colors (for neutral / informational actions)
+    info_button_color = "#2563EB"
+    info_button_hover = "#1D4ED8"
+    info_button_active = "#1E40AF"
+
     # Danger button colors (for destructive actions)
     danger_button_color = "#DC2626"
     danger_button_hover = "#B91C1C"
     danger_button_active = "#991B1B"
+
+    # Secondary button colors (neutral navigation actions)
+    secondary_button_color = "#374151"
+    secondary_button_hover = "#4B5563"
+    secondary_button_active = "#1F2933"
+
 
     # Font families and sizes used throughout the app
     display_header_font = ("Century Gothic", 20)
@@ -72,6 +83,26 @@ class GlobalStyles:
             ]
         )
 
+        # Secondary button styling (neutral navigation buttons)
+        style.configure(
+            "Secondary.TButton",
+            font=GlobalStyles.button_font,
+            padding=10,
+            background=GlobalStyles.secondary_button_color,
+            foreground="white",
+            borderwidth=0
+        )
+
+        style.map(
+            "Secondary.TButton",
+            background=[
+                ("active", GlobalStyles.secondary_button_hover),
+                ("pressed", GlobalStyles.secondary_button_active)
+            ]
+        )
+
+
+
         # Danger button styling (for delete/destructive actions)
         style.configure(
             "Danger.TButton",
@@ -90,6 +121,26 @@ class GlobalStyles:
             ]
         )
 
+        # Info button styling (for informational / secondary actions)
+        style.configure(
+            "Info.TButton",
+            font=GlobalStyles.button_font,
+            padding=10,
+            background=GlobalStyles.info_button_color,
+            foreground="white",
+            borderwidth=0
+        )
+
+        # Info button hover and active states
+        style.map(
+            "Info.TButton",
+            background=[
+                ("active", GlobalStyles.info_button_hover),
+                ("pressed", GlobalStyles.info_button_active)
+            ]
+        )
+
+
         # Header label styling (large, bold text)
         style.configure(
             "Header.TLabel",
@@ -97,6 +148,15 @@ class GlobalStyles:
             foreground=GlobalStyles.text_color,
             font=GlobalStyles.display_header_font
         )
+
+        # Sub-header label styling (used for totals)
+        style.configure(
+            "SubHeader.TLabel",
+            background=GlobalStyles.background_color,
+            foreground=GlobalStyles.text_color,
+            font=("Century Gothic", 14)
+        )
+
 
         # Form labels styling (for input field labels)
         style.configure(

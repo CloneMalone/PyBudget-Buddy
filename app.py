@@ -4,6 +4,8 @@ from views.main_view import MainView
 from styles.global_styles import GlobalStyles
 from models.database import init_db_background
 
+from os import system
+
 # Main entry point for the application
 def main():
     # Create the root window and set up basic properties
@@ -17,6 +19,9 @@ def main():
 
     # Initialize the database on a separate thread so it doesn't freeze the UI
     init_db_background()
+
+    # Clear Console
+    system('cls')
 
     # Start the app and listen for user interactions
     root.mainloop()

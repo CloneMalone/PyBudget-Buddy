@@ -4,3 +4,11 @@ data/
 # Ignore all cache
 __pycache__/
 *.pyc
+
+# Ignore Build files
+*.spec
+/build/
+/dist/
+
+# Ignore notion link
+PyBudgetBuddy_Planning.docx

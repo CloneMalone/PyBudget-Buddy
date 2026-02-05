@@ -48,6 +48,22 @@ class DashboardView(ttk.Frame):
             command=lambda: parent.show_frame("add_expense")
         ).pack(side="left", padx=10)
 
+        # Button to navigate to the Expenses screen
+        ttk.Button(
+            button_group,
+            text="View Expenses",
+            style="Info.TButton",
+            command=lambda: parent.show_frame("expenses", reason="home")
+        ).pack(side="left", padx=10)
+
+        # Button to navigate to the Income screen
+        ttk.Button(
+            button_group,
+            text="View Income",
+            style="Info.TButton",
+            command=lambda: parent.show_frame("income", reason="home")
+        ).pack(side="left", padx=10)
+
         # Button to delete all transactions (with danger styling)
         ttk.Button(
             button_group,
@@ -105,6 +121,7 @@ class DashboardView(ttk.Frame):
         """Show a temporary label in the center."""
         self.message_label.config(text=text)
         self.message_label.pack(pady=10)
+
         # Automatically hide the message after the specified duration
         self.after(duration, self.message_label.pack_forget)
 

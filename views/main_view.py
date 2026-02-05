@@ -7,7 +7,6 @@ from styles.global_styles import GlobalStyles
 from views.dashboard_view import DashboardView
 from views.add_expense_view import AddExpenseView
 from views.add_income_view import AddIncomeView
-from views.transaction_list_view import TransactionListView
 from views.expense_list_view import ExpenseListView
 from views.income_list_view import IncomeListView
 
@@ -31,7 +30,6 @@ class MainView(ttk.Frame):
         self.frames["dashboard"] = DashboardView(self)
         self.frames["add_income"] = AddIncomeView(self)
         self.frames["add_expense"] = AddExpenseView(self)
-        self.frames["transactions"] = TransactionListView(self)
         self.frames["expenses"] = ExpenseListView(self)
         self.frames["income"] = IncomeListView(self)
 
