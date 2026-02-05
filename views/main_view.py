@@ -9,6 +9,7 @@ from views.add_expense_view import AddExpenseView
 from views.add_income_view import AddIncomeView
 from views.expense_list_view import ExpenseListView
 from views.income_list_view import IncomeListView
+from views.analytics_view import AnalyticsView
 
 # Main application frame that manages all the different screens/pages
 class MainView(ttk.Frame):
@@ -32,6 +33,7 @@ class MainView(ttk.Frame):
         self.frames["add_expense"] = AddExpenseView(self)
         self.frames["expenses"] = ExpenseListView(self)
         self.frames["income"] = IncomeListView(self)
+        self.frames["analytics"] = AnalyticsView(self)
 
         # Configure grid layout to stretch and fill white space
         self.rowconfigure(0, weight=1)

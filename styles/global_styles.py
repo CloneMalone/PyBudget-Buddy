@@ -53,6 +53,13 @@ class GlobalStyles:
     entry_border_color = "#3F3F46"
     entry_focus_border = "#7C3AED"
 
+    # Category summary (small cards) styling
+    category_card_background = "#2563EB"
+    category_card_border = "#2B2B2B"
+    category_name_font = ("Century Gothic", 12, "bold")
+    category_amount_font = ("Century Gothic", 12, "bold")
+    category_card_padding = (10, 8)
+
 
 
     # Static method that applies all styles to the entire application
@@ -227,5 +234,30 @@ class GlobalStyles:
             background=GlobalStyles.background_color,
             foreground=GlobalStyles.text_color,
             font=GlobalStyles.loading_label_font
+        )
+
+        # Category card styling (small summary cards shown above tables)
+        style.configure(
+            "CategoryCard.TFrame",
+            background=GlobalStyles.category_card_background,
+            relief="flat",
+            borderwidth=1,
+            padding=GlobalStyles.category_card_padding
+        )
+
+        style.configure(
+            "CategoryName.TLabel",
+            background=GlobalStyles.category_card_background,
+            foreground=GlobalStyles.text_color,
+            font=GlobalStyles.category_name_font,
+            padding=(2,0)
+        )
+
+        style.configure(
+            "CategoryAmount.TLabel",
+            background=GlobalStyles.category_card_background,
+            foreground=GlobalStyles.text_color,
+            font=GlobalStyles.category_amount_font,
+            padding=(2,0)
         )
 

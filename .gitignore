@@ -12,3 +12,8 @@ __pycache__/
 
 # Ignore notion link
 PyBudgetBuddy_Planning.docx
+
+# Ignore AI project management files
+rules.md
+plan.md
+memory.md

@@ -35,6 +35,9 @@ class IncomeListView(ttk.Frame):
         )
         self.total_label.pack(pady=10)
 
+        # Container for category summary cards
+        self.categories_frame = ttk.Frame(self.center, style="App.TFrame")
+        self.categories_frame.pack(pady=6, fill="x")
         # Income table
         self.table = TreeView(
             self.center,
@@ -71,6 +74,9 @@ class IncomeListView(ttk.Frame):
         # Update total label
         self.total_label.config(text=f"Total: {summary['total']}")
 
+        # Render category summary cards
+        self.render_categories(summary.get("categories", []))
+
         # Convert rows for table display
         rows = []
 
@@ -85,3 +91,18 @@ class IncomeListView(ttk.Frame):
             )
 
         self.table.load_data(rows)
+
+    # Render compact category summary cards
+    def render_categories(self, categories):
+        # Clear existing category widgets
+        for child in self.categories_frame.winfo_children():
+            child.destroy()
+
+        # Create a small card for each category
+        for cat in categories:
+            card = ttk.Frame(self.categories_frame, style="CategoryCard.TFrame")
+            name = ttk.Label(card, text=cat["category"], style="CategoryName.TLabel")
+            amount = ttk.Label(card, text=f"$ {cat['total']:.2f}", style="CategoryAmount.TLabel")
+            name.pack(anchor="w")
+            amount.pack(anchor="w")
+            card.pack(side="left", padx=8, pady=4)

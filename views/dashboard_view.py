@@ -64,6 +64,14 @@ class DashboardView(ttk.Frame):
             command=lambda: parent.show_frame("income", reason="home")
         ).pack(side="left", padx=10)
 
+        # Button to navigate to the Analytics screen
+        ttk.Button(
+            button_group,
+            text="Analytics",
+            style="Info.TButton",
+            command=lambda: parent.show_frame("analytics", reason="home")
+        ).pack(side="left", padx=10)
+
         # Button to delete all transactions (with danger styling)
         ttk.Button(
             button_group,
