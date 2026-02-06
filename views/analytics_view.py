@@ -4,6 +4,7 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from controllers.summary_controller import SummaryController
+from controllers.analytics_controller import AnalyticsController
 
 
 class AnalyticsView(ttk.Frame):
@@ -41,18 +42,18 @@ class AnalyticsView(ttk.Frame):
         self.draw_expense_by_category()
 
     def draw_expense_by_category(self):
-        # Fetch expense category data
-        summary = SummaryController.get_expenses_summary()
-        categories = summary.get("categories", [])
+        # Fetch expense category data via the analytics controller
+        categories = AnalyticsController.get_expense_categories() or []
 
         # If no data, show a message
         if not categories:
             for child in self.canvas_container.winfo_children():
                 child.destroy()
+
             ttk.Label(
                 self.canvas_container,
-                text="No expense data to display.",
-                style="Form.TLabel"
+                text="No expense data available",
+                style="Form.TLabel",
             ).pack(pady=20)
             return
 
@@ -73,6 +74,8 @@ class AnalyticsView(ttk.Frame):
         canvas = FigureCanvasTkAgg(fig, master=self.canvas_container)
         canvas.draw()
         widget = canvas.get_tk_widget()
+        widget.pack(fill="both", expand=True)
+        self._canvas_widget = widget
         widget.pack(fill="both", expand=True)
 
         # store reference
